@@ -2,12 +2,13 @@ pipeline {
     agent any
 
     environment {
-        APP_IMAGE_NAME      = 'ibrahimadel10/new-app'   //github_repo/image_name
-        Dockerfile_PATH     = './Dockerfile'	       //path to Dockerfile in github repo
-        DEPLOYMENT_PATH     = './deployment.yaml'     //path to deployment file in github repo
+        APP_IMAGE_NAME      = 'ibrahimadel10/new-app'   //DockerHubub_repo/Image_name
+        Dockerfile_PATH     = './Dockerfile'	       //Path to Dockerfile in github repo
+        DEPLOYMENT_PATH     = './deployment.yaml'     //Path to deployment.yaml file in github repo
     }
 
     stages {
+        
         stage('Build and Push to DockerHub') {
             steps {
                 script {
@@ -27,7 +28,7 @@ pipeline {
 
         stage('Remove Local Images') {
             steps {
-                // Delete local Docker image
+                // Delete local Docker image after push them to DockerHub
                 sh "docker rmi ${APP_IMAGE_NAME}:${BUILD_NUMBER}"
             }
         }
@@ -35,7 +36,7 @@ pipeline {
         stage('Update Deployment Manifest and Deploy to OpenShift') {
             steps {
                 script {
-                    // Update deployment.yaml with new Docker Hub image
+                    // Update deployment.yaml file with the new Docker image
                     sh "sed -i 's|image:.*|image: ${APP_IMAGE_NAME}:${BUILD_NUMBER}|g' ${DEPLOYMENT_PATH}"
 
                     // Deploy updated manifest to OpenShift
