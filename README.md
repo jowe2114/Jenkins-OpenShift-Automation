@@ -7,7 +7,7 @@
 
 The Jenkins pipeline follows these stages to build, push, and deploy Docker images to dockerhub and an OpenShift cluster:
 
-1. **Build and Push to DockerHub** Build and push image to DockerHub.
+1. **Build and Push to DockerHub:** Build and push image to DockerHub.
 
 2. **Remove Images:** Remove local Docker image from the Jenkins server.
 
