@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_IMAGE_NAME      = 'ibrahimadel10/new-app'   //DockerHubub_repo/Image_name
+        APP_IMAGE_NAME      = 'jowe2114/new-app'   //DockerHubub_repo/Image_name
         Dockerfile_PATH     = './Dockerfile'	       //Path to Dockerfile in github repo
         DEPLOYMENT_PATH     = './deployment.yaml'     //Path to deployment.yaml file in github repo
     }
